@@ -1,6 +1,7 @@
 package com.example.creditcard.creditcard.view.form
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.example.creditcard.creditcard.viewmodel.CardViewModel
 
@@ -24,6 +26,7 @@ fun InputCardExpiration(cardViewModel: CardViewModel) {
         value = cardExpiration,
         onValueChange = { cardViewModel.setCardExpiration(it) },
         modifier = Modifier.fillMaxWidth(fraction = 0.6f),
-        placeholder = { Text("00/00") }
+        placeholder = { Text("00/00") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
     )
 }

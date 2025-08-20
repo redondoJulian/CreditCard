@@ -35,6 +35,13 @@ import java.util.Locale
 @Composable
 fun CreditCard(cardViewModel: CardViewModel) {
 
+    var selectedColor by rememberSaveable {
+        mutableStateOf<String>("red")
+    }
+    cardViewModel.cardColor.observe(LocalLifecycleOwner.current) {
+        selectedColor = it
+    }
+
     //Card number
     var localCardNumber by rememberSaveable { mutableStateOf("0000 0000 0000 0000") }
     cardViewModel.cardNumber.observe(LocalLifecycleOwner.current) {
@@ -62,10 +69,8 @@ fun CreditCard(cardViewModel: CardViewModel) {
     ) {
         Box(
             modifier = Modifier
-
-
                 .clip(RoundedCornerShape(8.dp))
-                .background(color = Color.Red)
+                .background(color = getColorCard(selectedColor))
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
@@ -164,4 +169,14 @@ fun cardExpirationFormatting(number: String) : String{
         newNumberFormatted += character
     }
     return newNumberFormatted
+}
+
+fun getColorCard(color: String) : Color {
+    val actualColor = when(color){
+        "red" -> Color.Red
+        "blue" -> Color.Blue
+        "green" -> Color.Green
+        else -> Color.Red
+    }
+    return actualColor
 }

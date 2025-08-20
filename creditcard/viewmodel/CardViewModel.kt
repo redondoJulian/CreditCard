@@ -20,6 +20,13 @@ class CardViewModel(context: Context) : ViewModel() {
     private var _cardExpiration = MutableLiveData<String>(cardModel.getCardExpiration())
     var cardExpiration: LiveData<String> = _cardExpiration
 
+    private var _cardColor = MutableLiveData<String>()
+    var cardColor: LiveData<String> = _cardColor
+
+    fun setCardColor(color: String){
+        _cardColor.value = color
+    }
+
     fun setCardNumber(number: String){
         if(number.length > 16){return}
         _cardNumber.value = cardModel.changeCardNumber(number)
